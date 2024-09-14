@@ -19,9 +19,6 @@ df["diagnosis"] = df["diagnosis"].replace({"M": 1, "B": 0})
 df.drop(['id', 'Unnamed: 32'], axis=1, inplace=True)
 print(f"Number of columns after dropping: {len(df.columns)}")
 
-# Making a count plot to check the balance in data
-sns.catplot(x="diagnosis", kind="count", data=df, palette="Set2")
-plt.show()
 
 # Select 6 features to use (you can adjust these as needed)
 selected_features = ['radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean', 'smoothness_mean', 'compactness_mean']
