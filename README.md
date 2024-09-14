@@ -1,5 +1,5 @@
 # Breast Cancer Detection using Logistic Regression
-This repository contains code for a machine learning model that uses logistic regression to detect breast cancer based on various features. The model is trained on a dataset of breast cancer cases and uses data scaling to achieve an accuracy of 98.24%.
+This repository contains code for a machine learning model that uses logistic regression to detect breast cancer based on various features. The model is trained on a dataset of breast cancer cases and uses data scaling to achieve an accuracy of 95.24%.
 <br>
 ### Dataset
 The dataset used for this project is the Breast Cancer Wisconsin (Diagnostic) Data Set from Kaggle. It contains 569 samples of malignant and benign tumor cells with 30 features each. The features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image.<br>

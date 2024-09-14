@@ -1,0 +1,5 @@
+docker build -t breast-cancer-predict .
+
+Create and run the docker container
+----------------------------------------
+docker run -it -p 5000:5000 1376e256da89f65e16a0f7855bbb59318d4d91af471becbee31ddbdf66cb0659
