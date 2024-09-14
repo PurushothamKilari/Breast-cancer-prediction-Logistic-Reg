@@ -91,5 +91,5 @@ jobs:
             
             # Run the Docker container
             echo "Waiting for the Docker container to start..."
-            sudo docker run -d --name my-container -p 8501:8501 ${{ secrets.DOCKER_HUB_USERNAME }}/breast-cancer-prediction:latest
+            sudo docker run -d --name my-container -p 5000:5000 ${{ secrets.DOCKER_HUB_USERNAME }}/breast-cancer-prediction:latest
           EOF
