@@ -48,14 +48,14 @@ jobs:
           echo "pushing the Docker file to DockerHUB ..."
           docker tag breast-cancer-prediction:latest ${{ secrets.DOCKER_HUB_USERNAME }}/breast-cancer-prediction:latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/breast-cancer-prediction:latest
-      # - name: Set up SSH key
-      #   uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
-      #   with:
-      #     ORIGIN: ${{ secrets.EC2_HOST }} 
-      #     SSHKEY: ${{ secrets.EC2_SSH_KEY }}
-      #     NAME: production
-      #     PORT: 22
-      #     USER: ${{ secrets.EC2_USER }} 
+      - name: Set up SSH key
+        uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
+        with:
+          ORIGIN: ${{ secrets.EC2_HOST }} 
+          SSHKEY: ${{ secrets.EC2_SSH_KEY }}
+          NAME: production
+          PORT: 22
+          USER: ${{ secrets.EC2_USER }} 
       - name: Deploy Docker Image
         run: |
           ssh production << 'EOF'
