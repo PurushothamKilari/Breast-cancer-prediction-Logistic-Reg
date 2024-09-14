@@ -11,8 +11,8 @@ COPY . /app/
 
 RUN python model_generator.py
 
-EXPOSE  8501 
+EXPOSE  5000 
 ENV FLASK_APP=app.py
 
 # Run the Flask application when the container launches
-CMD ["sh", "-c","python -m streamlit run app.py"]
+CMD ["sh", "-c","python app.py"]

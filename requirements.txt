@@ -2,6 +2,8 @@ matplotlib
 pandas
 scikit_learn
 seaborn
-streamlit
+flask
 h2o
 joblib
+matplotlib
+flask_cors

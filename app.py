@@ -1,48 +1,39 @@
+from flask import Flask, render_template, request
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 import joblib
-import streamlit as st
+from flask_cors import CORS
 
+# Initialize the Flask app
+app = Flask(__name__)
+
+CORS(app)
 # Load the saved model and scaler
 model = joblib.load('breast_cancer_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# Streamlit page configuration
-st.set_page_config(page_title="Breast Cancer Detection")
-st.title("Breast Cancer Detection Using Classification")
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://4kwallpapers.com/images/wallpapers/macos-monterey-stock-green-dark-mode-layers-5k-6016x3384-5890.jpg");
-        background-attachment: fixed;
-        background-size: cover;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    prediction = None
+    if request.method == 'POST':
+        # Get input values from the form
+        radius_mean = float(request.form.get('radius_mean', 0))
+        texture_mean = float(request.form.get('texture_mean', 0))
+        perimeter_mean = float(request.form.get('perimeter_mean', 0))
+        area_mean = float(request.form.get('area_mean', 0))
+        smoothness_mean = float(request.form.get('smoothness_mean', 0))
+        compactness_mean = float(request.form.get('compactness_mean', 0))
 
-# Accept user inputs for the 6 feature columns
-radius_mean = st.number_input('Radius Mean')
-texture_mean = st.number_input('Texture Mean')
-perimeter_mean = st.number_input('Perimeter Mean')
-area_mean = st.number_input('Area Mean')
-smoothness_mean = st.number_input('Smoothness Mean')
-compactness_mean = st.number_input('Compactness Mean')
+        # Prepare the input for prediction
+        user_data = [[radius_mean, texture_mean, perimeter_mean, area_mean, smoothness_mean, compactness_mean]]
 
-# Prepare the input for prediction (make sure the input follows the order of the features)
-user_data = [[radius_mean, texture_mean, perimeter_mean, area_mean, smoothness_mean, compactness_mean]]
+        # Scale the input using the scaler
+        user_data_scaled = scaler.transform(user_data)
 
-# Scale the input using the same scaler used during training
-user_data_scaled = scaler.transform(user_data)
+        # Make predictions using the pre-trained model
+        prediction = model.predict(user_data_scaled)[0]
 
-# Make predictions using the pre-trained model
-prediction = model.predict(user_data_scaled)
+    return render_template('index.html', prediction=prediction)
 
-# Display the prediction result to the user
-if prediction[0] == 0:
-    st.write('Prediction: Benign')
-else:
-    st.write('Prediction: Malignant')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
