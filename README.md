@@ -24,10 +24,10 @@ You can also use Streamlit to interact with the code and visualize the results. 
 
 To run the code with Streamlit, execute the following command in your terminal:<br>
 
-`python -m streamlit run app.py`
+`python app.py`
 <br>
 
-You can then access the web app from your browser at http://localhost:8501<br>
+You can then access the web app from your browser at http://localhost:5000<br>
 
 ### Results
 The logistic regression model achieved an accuracy of 95.24% on the test set, which is quite impressive for such a simple model.
